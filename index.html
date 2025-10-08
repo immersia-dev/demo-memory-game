@@ -40,8 +40,7 @@
       <!-- Rig do usuário -->
       <a-entity
         id="rig"
-        position="0.6 0 -2"
-        movement-controls="fly:false; speed:0.12; camera: #hmd"
+        position="0.6 0 -3"
         simple-navmesh-constraint="navmesh: .navmesh; xzOrigin: #hmd; height: 0;
         fall: 0.6"
       >
@@ -92,6 +91,13 @@
           text="value: 0; align:center; color:black; width:2.5;"
         ></a-entity>
       </a-entity>
+
+      <a-entity
+        position="-3.064 2.472 -2.302"
+        rotation="0 90 0"
+        scale="2 2 1"
+        text="value: Controles; align:center; color:black; width:2.5;"
+      ></a-entity>
 
       <a-entity
         id="reload_button"
