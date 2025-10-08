@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
+    <script src="./scripts/simple-navmesh-constraint.js"></script>
+  </head>
+  <body>
+    <a-scene
+      renderer="physicallyCorrectLights: true; colorManagement: true"
+      background="color: #e9e9e9"
+    >
+      <a-assets>
+        <a-asset-item id="room" src="./assets/classroom.glb"></a-asset-item>
+        <a-asset-item id="navmesh" src="./assets/navmesh.glb"></a-asset-item>
+
+        <img id="vivare" src="./imgs/vivare_logo.jpg" />
+        <img id="clinser" src="./imgs/clinser_logo.jpg" />
+        <img id="immersia" src="./imgs/immersia_logo.png" />
+
+        <img id="tutorial" src="./imgs/tutorial.png" />
+      </a-assets>
+
+      <!-- Cena -->
+      <a-entity
+        gltf-model="#room"
+        position="0 0 -2.5"
+        scale="0.7 0.7 0.7"
+      ></a-entity>
+
+      <!-- NavMesh: alinhei Z com a sala -->
+      <a-entity
+        gltf-model="#navmesh"
+        position="0 0 -2.5"
+        scale="0.7 0.7 0.7"
+        class="navmesh"
+        visible="false"
+      ></a-entity>
+
+      <!-- Rig do usuário -->
+      <a-entity
+        id="rig"
+        position="0.6 1.6 -2"
+        movement-controls="fly:false; speed:0.12"
+        simple-navmesh-constraint="navmesh: .navmesh; height: 1.6; fall: 0.6"
+      >
+        <a-entity
+          id="leftController"
+          laser-controls="hand: left"
+          cursor="rayOrigin: entity; fuse: false"
+          raycaster="objects: .card-face, #reload_button; far: 8; interval: 0; showLine: true"
+          line="opacity: 0.6"
+        ></a-entity>
+
+        <!-- DIREITO -->
+        <a-entity
+          id="rightController"
+          laser-controls="hand: right"
+          cursor="rayOrigin: entity; fuse: false"
+          raycaster="objects: .card-face, #reload_button; far: 8; interval: 0; showLine: true"
+          line="opacity: 0.6"
+        ></a-entity>
+
+        <!-- Mouse (desktop) -->
+        <a-entity
+          camera
+          look-controls
+          cursor="rayOrigin: mouse"
+          raycaster="objects: .card-face, #reload_button; far: 10"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Luzes -->
+      <a-entity
+        light="type: hemisphere; intensity: 2.0; color: #fff; groundColor: #777"
+      ></a-entity>
+      <a-entity
+        light="type: directional; intensity: 1.6"
+        position="3 6 3"
+      ></a-entity>
+
+      <a-entity id="play_text" position="0.88 1.8 -6">
+        <a-entity
+          text="value: Quantidade de Jogadas; align:center; color:black; width:2.5;"
+        ></a-entity>
+        <a-entity
+          id="play_count"
+          position="0 -0.2 0"
+          text="value: 0; align:center; color:black; width:2.5;"
+        ></a-entity>
+      </a-entity>
+
+      <a-entity
+        id="reload_button"
+        geometry="primitive: plane; height: 0.25; width: 1.0;"
+        material="color: white"
+        position="0.88 1.1 -6"
+      >
+        <a-entity
+          text="value: Reiniciar; align:center; color:black; width:3.5;"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Imagens -->
+      <a-image
+        src="#vivare"
+        position="-1.511 3.077 -6.174"
+        width="2"
+        height="0.7"
+      ></a-image>
+      <a-image
+        src="#clinser"
+        position=" 2.837 3.077 -6.174"
+        width="2"
+        height="0.7"
+      ></a-image>
+      <a-image
+        src="#immersia"
+        position=" 0.660 3.077 -6.174"
+        width="2"
+        height="0.7"
+      ></a-image>
+
+      <a-image
+        src="#tutorial"
+        position="-3.050 1.500 -2.300"
+        rotation="0 90 0"
+        width="2.5"
+        height="1.5"
+      ></a-image>
+    </a-scene>
+  </body>
+  <script src="./scripts/puzzle.js"></script>
+</html>
