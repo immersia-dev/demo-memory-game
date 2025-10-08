@@ -40,10 +40,12 @@
       <!-- Rig do usuário -->
       <a-entity
         id="rig"
-        position="0.6 1.6 -2"
-        movement-controls="fly:false; speed:0.12"
-        simple-navmesh-constraint="navmesh: .navmesh; height: 1.6; fall: 0.6"
+        position="0.6 0 -2"
+        movement-controls="fly:false; speed:0.12; camera: #hmd"
+        simple-navmesh-constraint="navmesh: .navmesh; xzOrigin: #hmd; height: 0;
+        fall: 0.6"
       >
+        <!-- ESQUERDO -->
         <a-entity
           id="leftController"
           laser-controls="hand: left"
@@ -61,8 +63,9 @@
           line="opacity: 0.6"
         ></a-entity>
 
-        <!-- Mouse (desktop) -->
+        <!-- Câmera / HMD -->
         <a-entity
+          id="hmd"
           camera
           look-controls
           cursor="rayOrigin: mouse"
@@ -130,5 +133,6 @@
       ></a-image>
     </a-scene>
   </body>
+  <script src="./scripts/vr-height.js"></script>
   <script src="./scripts/puzzle.js"></script>
 </html>
